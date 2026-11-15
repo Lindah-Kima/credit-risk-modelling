@@ -2,9 +2,11 @@
 
 A practical credit risk project focused on borrower risk assessment, credit scorecard development, default prediction and lending decisions using statistical analysis and machine learning.
 
-**Status:** In development
+**Status:** In Development
 
-## Project Overview
+---
+
+## 1. Project Overview
 
 This project explores how financial institutions assess and manage credit risk using customer, loan and repayment data.
 
@@ -14,57 +16,67 @@ The objective is to build an end-to-end credit risk modelling workflow, from dat
 
 The project also explores how predictive models can be integrated into applications, allowing users to submit borrower information, receive model-generated predictions and interpret the results through an interactive interface.
 
-## Key Areas
+---
 
-### 1. Exploratory Data Analysis
+## 2. Key Areas
+
+### 2.1 Exploratory Data Analysis
+
 - Analyse customer demographics, financial characteristics and loan behaviour.
 - Investigate default patterns across customer and loan segments.
 - Identify relationships between borrower characteristics and repayment outcomes.
 - Examine missing values, outliers and class imbalance.
 
-### 2. Credit Risk Measurement
+### 2.2 Credit Risk Measurement
+
 - **Probability of Default (PD):** Estimate the likelihood of a borrower defaulting over a defined period.
 - **Exposure at Default (EAD):** Estimate the outstanding exposure when default occurs.
 - **Loss Given Default (LGD):** Estimate the proportion of exposure not recovered after default.
 - **Expected Loss (EL):** Calculate expected credit loss using PD × EAD × LGD.
 
-### 3. Credit Scorecard Development
+### 2.3 Credit Scorecard Development
+
 - Data binning and variable transformation.
 - Weight of Evidence (WOE) and Information Value (IV).
 - Logistic regression modelling.
 - Scorecard development and scaling.
 - Score interpretation and reason codes.
 
-### 4. Default Prediction
+### 2.4 Default Prediction
+
 - Develop models to estimate borrower default risk.
 - Establish a logistic regression baseline.
 - Compare machine learning models such as Random Forest and XGBoost.
 - Handle class imbalance and feature selection.
 - Evaluate model performance and probability calibration.
 
-### 5. Loan Limit Modelling
+### 2.5 Loan Limit Modelling
+
 - Analyse historical lending patterns and customer affordability indicators.
 - Develop models to estimate potential loan limits.
 - Evaluate predictions against historical lending outcomes.
 - Apply affordability and risk-based lending constraints.
 
-### 6. Credit Decisioning
+### 2.6 Credit Decisioning
+
 - Combine credit scores, predicted default probabilities and lending rules.
 - Define approval, rejection and manual review criteria.
 - Generate decision explanations.
 - Examine the impact of different decision thresholds.
 
-### 7. Portfolio Risk Analysis
+### 2.7 Portfolio Risk Analysis
+
 - Analyse portfolio exposure and expected losses.
 - Compare default rates across customer segments.
 - Examine risk concentration and portfolio composition.
 - Develop visualisations for monitoring portfolio performance.
 
-### 8. Model Serving and Application Integration
+### 2.8 Model Serving and Application Integration
 
 Explore how trained machine learning models are made accessible to applications and used to generate predictions.
 
 **Model API Development**
+
 - Package trained models and their preprocessing components for inference.
 - Develop REST API endpoints using FastAPI.
 - Define request and response schemas using Pydantic.
@@ -72,6 +84,7 @@ Explore how trained machine learning models are made accessible to applications 
 - Expose model predictions through HTTP endpoints.
 
 **Application Development**
+
 - Build an interactive Gradio application for submitting borrower information.
 - Design input forms for customer financial and credit characteristics.
 - Connect the Gradio interface to the FastAPI prediction service.
@@ -95,7 +108,9 @@ The intended prediction workflow is:
 
 This establishes an understanding of how an independently deployed prediction service can be consumed by an application, beyond simply developing and exposing an API.
 
-## Modelling and Evaluation
+---
+
+## 3. Modelling and Evaluation
 
 Models will be assessed using metrics appropriate to credit risk, including:
 
@@ -109,7 +124,9 @@ Models will be assessed using metrics appropriate to credit risk, including:
 
 Time-based validation will be used where the data supports it, with particular attention to target leakage and observation windows.
 
-## Technology Stack
+---
+
+## 4. Technology Stack
 
 | Area | Tools |
 |---|---|
@@ -127,181 +144,195 @@ Time-based validation will be used where the data supports it, with particular a
 | Deployment | Docker, GitHub Actions |
 | Model monitoring | Evidently AI |
 
-## Architecture
+---
+
+## 5. Architecture
 
 The project follows a layered architecture separating data management, model development, prediction services and application interaction.
 
+### 5.1 End-to-End Workflow
+
 ```text
 Tonic Fabricate
-      |
-      v
+       |
+       v
 Synthetic Customer and Loan Data
-      |
-      v
+       |
+       v
 PostgreSQL (Aiven)
-      |
-      v
+       |
+       v
 Data Exploration and Preparation
-      |
-      v
+       |
+       v
 Feature Engineering
-      |
-      v
+       |
+       v
 Credit Risk Analysis
-      |
-      v
+       |
+       v
 Scorecard and Predictive Models
-      |
-      v
+       |
+       v
 Model Evaluation and Explainability
-      |
-      v
+       |
+       v
 Model Packaging and Versioning
-      |
-      v
+       |
+       v
 FastAPI Prediction Service
-      |
-      v
+       |
+       v
 Gradio Application
-      |
-      v
+       |
+       v
 User Inputs and Model Predictions
 ```
 
-### Application Prediction Flow
+### 5.2 Application Prediction Flow
 
 ```text
-User
- |
- v
-Gradio Interface
- |
- | HTTP POST Request (JSON)
- v
-FastAPI Endpoint
- |
- v
-Input Validation (Pydantic)
- |
- v
-Preprocessing and Feature Transformation
- |
- v
-Trained Machine Learning Model
- |
- v
-Prediction
- |
- v
-JSON Response
- |
- v
-Gradio Interface
- |
- v
-Results Displayed to User
+             User
+               |
+               v
+        Gradio Interface
+               |
+               | HTTP POST Request (JSON)
+               v
+         FastAPI Endpoint
+               |
+               v
+      Input Validation (Pydantic)
+               |
+               v
+  Preprocessing and Feature Transformation
+               |
+               v
+    Trained Machine Learning Model
+               |
+               v
+           Prediction
+               |
+               v
+         JSON Response
+               |
+               v
+        Gradio Interface
+               |
+               v
+      Results Displayed to User
 ```
 
 MLflow will support experiment tracking and model versioning. Docker and CI/CD will support reproducible packaging and deployment, while monitoring will help assess data and model stability.
 
-## Repository Structure
+---
 
-```text
-## Repository Structure
+## 6. Repository Structure
+
+The project is organised into separate directories to keep data, modelling logic, application code, configuration and documentation manageable as the project grows.
 
 ```text
 credit-risk-modelling/
 │
 ├── .github/
-│   └── workflows/              # GitHub Actions workflows for automated testing and CI/CD
+│   └── workflows/                  # GitHub Actions workflows for automated testing and CI/CD
 │
-├── api/                        # FastAPI application: API routes, request handling and prediction endpoints
+├── api/                            # FastAPI backend, API routes and prediction endpoints
 │
-├── app/                        # Gradio user interface where users enter borrower details and view predictions
+├── app/                            # Gradio interface for user inputs and prediction results
 │
-├── configs/                    # Configuration files for models, application settings and experiments
+├── configs/                        # Application, model and experiment configuration files
 │
 ├── data/
-│   ├── raw/                    # Original datasets as received or generated
-│   ├── interim/                # Temporarily cleaned or transformed datasets
-│   └── processed/              # Final datasets prepared for analysis and modelling
+│   ├── raw/                        # Original synthetic datasets
+│   ├── interim/                    # Data undergoing cleaning and transformation
+│   └── processed/                  # Cleaned datasets ready for analysis and modelling
 │
-├── docker/                     # Dockerfiles and related files for packaging the application
+├── docker/                         # Dockerfiles and Docker-related configuration
 │
-├── docs/                       # Project documentation, technical notes and methodology explanations
+├── docs/                           # Technical documentation, methodology and project notes
 │
-├── logs/                       # Application, API and model execution logs
+├── logs/                           # Application, API and model execution logs
 │
-├── migrations/                 # Database migration files for tracking changes to database structure
+├── migrations/                     # Database schema changes and migration scripts
 │
-├── models/                     # Saved and trained model files, encoders and preprocessing objects
+├── models/                         # Saved models and preprocessing artefacts
 │
-├── notebooks/                  # Jupyter notebooks for exploration, analysis, experiments and prototyping
+├── notebooks/                      # Jupyter notebooks for exploration and experimentation
 │
 ├── reports/
-│   ├── figures/                # Charts, graphs and visual outputs from analysis
-│   └── summaries/              # Written analysis, model evaluation results and project findings
+│   ├── figures/                    # Charts, graphs and visual outputs
+│   └── summaries/                  # Analysis findings and model evaluation summaries
 │
-├── scripts/                    # Standalone scripts for repetitive tasks such as data preparation and training
+├── scripts/                        # Standalone scripts for data preparation, training and other tasks
 │
-├── sql/                        # SQL queries for data extraction, transformation and database operations
+├── sql/                            # SQL queries for data extraction and manipulation
 │
 ├── src/
 │   └── credit_risk/
-│       ├── data/               # Reusable functions for loading, cleaning and preparing data
-│       ├── features/           # Feature engineering and variable transformation logic
-│       ├── evaluation/         # Model evaluation metrics and validation procedures
-│       ├── models/             # Model training, prediction and modelling logic
-│       ├── scoring/             # Credit scorecard development, WOE, IV and score scaling
-│       └── decisioning/        # Credit decision rules, risk grades and lending recommendations
+│       ├── __init__.py
+│       │
+│       ├── data/                   # Data loading, cleaning and preparation functions
+│       ├── features/               # Feature engineering and variable transformations
+│       ├── evaluation/             # Model evaluation metrics and validation procedures
+│       ├── models/                 # Model training, inference and prediction logic
+│       ├── scoring/                # Scorecard development, WOE, IV and score scaling
+│       └── decisioning/            # Credit decision rules, risk grades and lending recommendations
 │
-├── tests/                      # Automated tests for data processing, models, API endpoints and application logic
+├── tests/                          # Automated tests for data, models, APIs and application logic
 │
-├── utils/                      # General-purpose helper functions shared across the project
+├── utils/                          # General-purpose reusable helper functions
 │
-├── .env.example                # Template showing the environment variables required by the project
-├── .gitignore                  # Specifies files and folders Git should not track
-├── .dockerignore               # Specifies files Docker should exclude when building an image
-├── pyproject.toml              # Project metadata, dependencies and Python development tool configuration
-├── README.md                   # Main project description, setup instructions and documentation
-└── requirements.txt            # Python package dependencies
+├── .dockerignore                   # Files and folders excluded from Docker build context
+├── .editorconfig                   # Shared code formatting and editor settings
+├── .env.example                    # Template for required environment variables
+├── .gitignore                      # Files and folders Git should not track
+├── .python-version                 # Intended Python version for the project
+├── pyproject.toml                  # Project metadata, dependencies and development tool configuration
+├── README.md                       # Project overview and documentation
+└── requirements.txt                # Python package dependencies
 ```
 
-### Understanding the Main Folders
+### 6.1 Understanding the Main Directories
 
-| Folder | What it means |
+| Directory | Purpose |
 |---|---|
-| `.github/workflows` | Automates tasks such as running tests whenever code is pushed to GitHub. |
-| `api` | Contains the FastAPI backend that receives application requests and returns model predictions. |
-| `app` | Contains the Gradio interface that users interact with. |
-| `configs` | Stores settings that control how different parts of the project run. |
-| `data` | Organises datasets according to their stage of preparation. |
-| `docker` | Contains instructions for packaging the application and its dependencies into Docker containers. |
-| `docs` | Holds explanations of how the project works and why particular approaches were used. |
-| `logs` | Keeps records of application activity, errors and execution events. |
-| `migrations` | Tracks changes made to database tables and structures over time. |
-| `models` | Stores trained models and supporting files needed to make predictions. |
-| `notebooks` | Provides an interactive environment for exploring data and experimenting with modelling approaches. |
-| `reports` | Stores the outputs of analysis, charts and model evaluation. |
-| `scripts` | Holds Python scripts that perform specific project tasks. |
-| `sql` | Stores SQL statements used to retrieve and manipulate data. |
-| `src` | Contains the main reusable Python code that powers the credit-risk functionality. |
-| `tests` | Contains checks to make sure the different parts of the project work correctly. |
-| `utils` | Holds small reusable helper functions that do not belong to a specific module. |
+| `.github/workflows/` | Automates tasks such as running tests when changes are pushed to GitHub. |
+| `api/` | Contains the FastAPI backend that receives application requests and returns model predictions. |
+| `app/` | Contains the Gradio interface that users interact with. |
+| `configs/` | Stores settings that control how different parts of the project run. |
+| `data/` | Organises datasets according to their stage of preparation. |
+| `docker/` | Contains instructions for packaging the application and its dependencies into containers. |
+| `docs/` | Holds explanations of how the project works and the methodologies used. |
+| `logs/` | Keeps records of application activity, errors and execution events. |
+| `migrations/` | Tracks changes made to database tables and structures over time. |
+| `models/` | Stores trained models and supporting files required to make predictions. |
+| `notebooks/` | Provides an interactive environment for exploring data and experimenting with modelling approaches. |
+| `reports/` | Stores analysis outputs, charts and model evaluation results. |
+| `scripts/` | Holds standalone Python scripts for specific project tasks. |
+| `sql/` | Stores SQL statements used to retrieve and manipulate data. |
+| `src/credit_risk/` | Contains the reusable Python code powering the credit risk functionality. |
+| `tests/` | Contains automated checks to ensure different parts of the project work correctly. |
+| `utils/` | Holds general helper functions shared across the project. |
 
-### Application Architecture
+### 6.2 Understanding the Main Python Modules
 
-The project separates the user interface, API and modelling logic:
+Within `src/credit_risk/`, responsibilities are separated into smaller modules:
 
-1. **Gradio (`app/`)** – provides the interface where a user enters borrower information.
-2. **FastAPI (`api/`)** – receives the information through an HTTP request, validates it and sends it to the prediction logic.
-3. **Credit Risk Logic (`src/`)** – handles preprocessing, model inference, scoring and decisioning.
-4. **Models (`models/`)** – contains the saved models and preprocessing objects required for predictions.
-5. **Gradio** – displays the prediction and relevant credit-risk results returned by the API.
+| Module | Purpose |
+|---|---|
+| `data/` | Loads, cleans and prepares datasets. |
+| `features/` | Creates and transforms variables used by the models. |
+| `evaluation/` | Measures model performance and validates predictions. |
+| `models/` | Handles model training, loading and inference. |
+| `scoring/` | Develops and manages credit scorecards, including WOE, IV and score scaling. |
+| `decisioning/` | Converts model outputs into lending decisions and risk categories. |
 
-```
+**Architecture principle:** Keep reusable business and modelling logic inside `src/credit_risk/`. The API and Gradio application should consume this functionality rather than duplicate it.
 
-## Development Approach
+---
+
+## 7. Development Approach
 
 The project will follow a structured development process:
 
@@ -318,10 +349,14 @@ The project will follow a structured development process:
 11. Containerise and deploy the application and prediction service.
 12. Track experiments and monitor model performance.
 
-## Disclaimer
+---
+
+## 8. Disclaimer
 
 All datasets used in this project are synthetic. The results are intended for educational and technical demonstration and should not be used to make real lending decisions.
 
-## Project Status
+---
+
+## 9. Project Status
 
 This project is under active development. Analysis, model results, visualisations, API implementation and application integration will be documented as each component is completed.
