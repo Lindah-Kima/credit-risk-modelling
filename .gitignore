@@ -1,0 +1,140 @@
+# ==========================================
+# PYTHON
+# ==========================================
+
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyd
+
+# Python build and distribution files
+build/
+dist/
+*.egg-info/
+.eggs/
+wheels/
+
+# ==========================================
+# VIRTUAL ENVIRONMENTS
+# ==========================================
+
+venv/
+.venv/
+env/
+ENV/
+
+# ==========================================
+# ENVIRONMENT VARIABLES AND SECRETS
+# ==========================================
+
+.env
+.env.*
+!.env.example
+
+# Secret keys and credentials
+*.pem
+*.key
+*.crt
+secrets/
+credentials.json
+
+# ==========================================
+# JUPYTER NOTEBOOKS
+# ==========================================
+
+.ipynb_checkpoints/
+
+# ==========================================
+# TESTING AND CODE QUALITY
+# ==========================================
+
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.mypy_cache/
+.ruff_cache/
+.hypothesis/
+
+# ==========================================
+# LOGS AND TEMPORARY FILES
+# ==========================================
+
+logs/*
+!logs/.gitkeep
+
+*.log
+*.tmp
+*.temp
+
+# ==========================================
+# DATA FILES
+# ==========================================
+
+# exclude actual datasets
+data/raw/*
+data/interim/*
+data/processed/*
+
+!data/raw/.gitkeep
+!data/interim/.gitkeep
+!data/processed/.gitkeep
+
+# Common dataset formats
+*.csv
+*.parquet
+*.feather
+*.xlsx
+*.xls
+*.sqlite
+*.db
+
+# ==========================================
+# MODEL ARTEFACTS
+# ==========================================
+
+# Large trained model files
+*.pkl
+*.pickle
+*.joblib
+*.h5
+*.keras
+*.onnx
+
+# Keep the models directory structure
+models/*
+!models/.gitkeep
+
+# ==========================================
+# EXPERIMENT TRACKING
+# ==========================================
+
+mlruns/
+mlartifacts/
+mlflow.db
+
+# ==========================================
+# DOCKER
+# ==========================================
+
+# Local Docker environment files
+docker-compose.override.yml
+
+# ==========================================
+# IDE AND EDITOR FILES
+# ==========================================
+
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ==========================================
+# OPERATING SYSTEM FILES
+# ==========================================
+
+.DS_Store
+Thumbs.db
+desktop.ini
